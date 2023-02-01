@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: mkdir -p target
+      #- run: mkdir -p target
       
       - name: Set up Java version
         uses: actions/setup-java@v3
@@ -31,8 +31,8 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: java-app
-         # path: '${{ github.workspace }}/target/*.war'
-          path: '/home/runner/work/java-docs-spring-hello-world/java-docs-spring-hello-world/target/*.war'
+          path: '${{ github.workspace }}/target/*.war'
+         # path: '/home/runner/work/java-docs-spring-hello-world/java-docs-spring-hello-world/target/*.war'
 
   deploy:
     runs-on: ubuntu-latest
@@ -46,11 +46,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: java-app
-          path: '/home/runner/work/java-docs-spring-hello-world/java-docs-spring-hello-world/target'
+          # path: '/home/runner/work/java-docs-spring-hello-world/java-docs-spring-hello-world/target'
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v2.2.5
         with:
           app-name: 'vfctest'
           slot-name: 'Production'
