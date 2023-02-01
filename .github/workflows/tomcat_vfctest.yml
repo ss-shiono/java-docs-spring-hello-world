@@ -53,10 +53,10 @@ jobs:
           
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2.2.5
+        uses: azure/webapps-deploy@v2
         with:
           app-name: 'vfctest'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B072DAB322D74F928D8527FD70CBBFFC }}
-          package: '*.war'
-         # package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/target/*.war'
+         # package: '*.war'
+          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/target/*.war'
