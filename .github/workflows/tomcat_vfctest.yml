@@ -25,14 +25,14 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean install
-        working-directory: target
+        #working-directory: target
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: java-app
          # path: '${{ github.workspace }}/target/*.war'
-          path: 'target/*.war'
+          path: '/home/runner/work/java-docs-spring-hello-world/java-docs-spring-hello-world/target/*.war'
 
   deploy:
     runs-on: ubuntu-latest
@@ -46,7 +46,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: java-app
-          path: 'target'
+          path: '/home/runner/work/java-docs-spring-hello-world/java-docs-spring-hello-world/target'
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
