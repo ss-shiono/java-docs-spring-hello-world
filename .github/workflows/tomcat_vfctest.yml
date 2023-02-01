@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: mkdir -p build/target
+      - run: mkdir -p target
       
       - name: Set up Java version
         uses: actions/setup-java@v3
@@ -25,13 +25,14 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean install
+        working-directory: target
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: java-app
          # path: '${{ github.workspace }}/target/*.war'
-          path: 'build/target/*.war'
+          path: 'target/*.war'
 
   deploy:
     runs-on: ubuntu-latest
@@ -45,7 +46,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: java-app
-          path: 'build/target/'
+          path: 'target'
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
