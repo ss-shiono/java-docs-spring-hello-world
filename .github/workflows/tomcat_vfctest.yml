@@ -49,8 +49,8 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: java-app
-          # path: '/home/runner/work/java-docs-spring-hello-world/java-docs-spring-hello-world/target'
-
+          path: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/target/*'
+          
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2.2.5
