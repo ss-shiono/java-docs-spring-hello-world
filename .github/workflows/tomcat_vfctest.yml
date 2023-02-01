@@ -30,12 +30,12 @@ jobs:
         run: mvn clean install
         #working-directory: target
 
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
-        with:
-          name: java-app
-          #path: '${{ github.workspace }}/target/*.war'
-          path: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/target/*.war'
+     # - name: Upload artifact for deployment job
+     #   uses: actions/upload-artifact@v3
+     #   with:
+     #     name: java-app
+     #     #path: '${{ github.workspace }}/target/*.war'
+     #     path: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/target/*.war'
 
   deploy:
     runs-on: ubuntu-latest
@@ -46,10 +46,10 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
-        with:
-          name: java-app
-          path: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/target/*'
+      #  uses: actions/download-artifact@v3
+       # with:
+        #  name: java-app
+         # path: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/target/*'
           
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -58,5 +58,5 @@ jobs:
           app-name: 'vfctest'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B072DAB322D74F928D8527FD70CBBFFC }}
-         # package: '*.war'
-          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/target/*.war'
+          package: '*.war'
+         # package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/target/*.war'
